@@ -1,0 +1,78 @@
+// There are flight paths between cities. If there is a flight between city A and city B then there is an edge between the cities. The cost of the edge can be the time that flight take to reach city B from A, or the amount of fuel used for the journey. Represent this as a graph. The node can be represented by airport name or name of the city. Use adjacency list representation of the graph or use adjacency matrix representation of the graph. Check whether the graph is connected or not. Justify the storage representation used.
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+class Graph
+{
+public:
+    int array[50][50];
+    string name[10];
+    int city1, city2;
+
+    int array_creation(int cities)
+    {
+        int array[cities][cities];
+        for (int i = 0; i < cities; i++)
+        {
+            for (int j = 0; j < cities; j++)
+            {
+                array[i][j] = 0;
+            }
+        }
+    }
+    int insert(int city_a, int city_b)
+    {
+
+        cout << "Enter the distance between city " << city_a << " & city " << city_b << " :-";
+        cin >> array[city_a][city_b];
+        array[city_b][city_a] = array[city_a][city_b];
+    }
+
+    void display(int cities)
+    {
+        cout << setw(5) << "";
+        for (int i = 0; i < cities; i++)
+        {
+            cout << setw(5) << name[i];
+        }
+        cout << endl;
+        for (int i = 0; i < cities; i++)
+        {
+            cout << setw(5) << name[i];
+            for (int j = 0; j < cities; j++)
+            {
+                cout << setw(5) << array[i][j];
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main()
+{
+    Graph obj;
+    int cities, city_a, city_b, edge;
+    cout << "Enter how many cities:- ";
+    cin >> cities;
+    obj.array_creation(cities);
+
+    for (int i = 0; i < cities; i++)
+    {   
+        cout<<"Enter the name of city ";
+        cin>>obj.name[i];
+    }
+    
+    cout << "\nEnter number of edge ";
+    cin >> edge;
+    for (int i = 0; i < edge; i++)
+    {   
+        cout << "\nEnter the city number 1:- ";
+        cin >> city_a;
+        cout << "\nEnter the city number 2:- ";
+        cin >> city_b;
+        obj.insert(city_a, city_b);
+    }
+    obj.display(cities);
+    return 0;
+}
